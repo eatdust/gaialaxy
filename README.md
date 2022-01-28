@@ -19,7 +19,7 @@ transformation matrices can be trivially set in the main program file
 
 ### Compilation
 
-Please ensure that you have a working installation of **gfortran** and
+Please ensure that you have a working installation of the **gfortran** and
 **gcc** compilers (or alternatives), the
 [cfitsio](https://heasarc.gsfc.nasa.gov/fitsio/) and
 [wcslib](https://www.atnf.csiro.au/people/mcalabre/WCS/wcslib/)
@@ -31,13 +31,13 @@ specify the install location of these libraries.
 ### Gaia Data
 
 The (empty) directory "data/" should be filled with Gaia data under
-the form of votable files (in the fits format) and named as
+the form of votable files (in the **fits format**) and named as
 "gaiadata_01.fits", gaiadata_02.fits" etc...
 
 The tables are expected to be of 6 columns (tfields) containing an
-identificator of the source [source_id], its galactic coordinates [l]
-and [b], the flux in the [G] band, the flux in the [RP] band and,
-finally, the flux in the [BP] band. These data can be obtained
+identificator of the source **source_id**, its galactic coordinates **l**
+and **b**, the flux in the **G** band, the flux in the **RP** band and,
+finally, the flux in the **BP** band. These data can be obtained
 from the [ESA/Gaia/DPAC data archives](https://gea.esac.esa.int/archive/).
 
 An example ADQL language query, which retrieves 100 sources in some sky
@@ -46,19 +46,24 @@ patch, reads:
 ```
 curl -k -b cookies.txt -X POST  --form PHASE=run 
      --form LANG=ADQL --form REQUEST=doQuery --form FORMAT=fits \
-     --form QUERY="SELECT TOP 100 source_id,l,b,phot_g_mean_flux,phot_rp_mean_flux,phot_bp_mean_flux \
+     --form QUERY="SELECT TOP 100 \
+     	    source_id,l,b,phot_g_mean_flux,phot_rp_mean_flux,phot_bp_mean_flux \
      	    FROM gaiaedr3.gaia_source \
 	    WHERE phot_g_mean_mag >=10 AND phot_rp_mean_mag >=10 AND phot_bp_mean_mag >=10 \
 	    AND l<180.0 and b >=0" "https://gea.esac.esa.int/tap-server/tap/async"
 ```
 
-Have fun!
-
 ---
 
 ### Example output
 
+A 2048x1024 pixels image of our galaxy:
+
 ![gaialaxy.jpg](/docs/gaialaxy.jpg)
+
+But nothing prevents you to go large, very large, very very large!
+
+Have fun!
 
 ---
 
