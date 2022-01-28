@@ -61,7 +61,7 @@ A 2048x1024 pixels image of our galaxy:
 
 ![gaialaxy.jpg](/docs/gaialaxy.jpg)
 
-But nothing prevents you to go large, very large, very very large!
+But nothing prevents you to go large, very large, very very large: [Gaialaxy.png](https://commons.wikimedia.org/wiki/File:Gaialaxy.png)
 
 Have fun!
 
