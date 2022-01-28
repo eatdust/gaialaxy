@@ -19,8 +19,8 @@ transformation matrices can be trivially set in the main program file
 
 ### Compilation
 
-Please ensure that you have a working installation of [gfortran] and
-[gcc] compilers (or alternatives), the
+Please ensure that you have a working installation of **gfortran** and
+**gcc** compilers (or alternatives), the
 [cfitsio](https://heasarc.gsfc.nasa.gov/fitsio/) and
 [wcslib](https://www.atnf.csiro.au/people/mcalabre/WCS/wcslib/)
 libraries. Editing the provided Makefile is certainly needed to
