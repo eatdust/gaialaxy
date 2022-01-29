@@ -2,7 +2,7 @@
 
 ### Summary
 
-Gaialaxy is a Modern Fortran code designed to produce an all sky color
+Gaialaxy is a modern fortran code designed to produce an all sky color
 image encoding the mean integrated flux coming from all light sources
 measured by the fantastic [Gaia
 satellite](https://en.wikipedia.org/wiki/Gaia_(spacecraft)) (ESA),
@@ -10,7 +10,7 @@ i.e., from more than a billion stars from our Galaxy and its nearby
 satellites.
 
 
-By default, the fluxes are calibrated in W/m^2/sr and the output
+By default, the fluxes are calibrated in W/m^2/nm/sr and the output
 colors are in the linear sRGB color space. Other units and color
 transformation matrices can be trivially set in the main program file
 (gaialaxy.f90). Check out the python code
