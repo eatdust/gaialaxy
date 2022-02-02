@@ -13,7 +13,7 @@ satellites.
 By default, the fluxes are calibrated in W/m^2/nm/sr and the output
 colors are in the linear sRGB color space. Other units and color
 transformation matrices can be trivially set in the main program file
-(gaialaxy.f90). Check out the python code
+(gaialaxy.f03). Check out the python code
 [spectroll](https://github.com/eatdust/spectroll) to compute color
 matrices from scratch.
 

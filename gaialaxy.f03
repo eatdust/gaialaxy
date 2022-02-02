@@ -43,7 +43,9 @@ program gaialaxy
   real(cd), dimension(2) :: pixangles
   real(fdp) :: pixsterad
   
-  integer :: icolor
+  integer :: i, icolor
+  integer, dimension(:), allocatable :: outcolors
+  
   integer, parameter :: ncolors = 3
   real(fdp), dimension(ncolors,ngaiacolors) :: colormatrix
 
@@ -63,10 +65,12 @@ program gaialaxy
   nx = 32768
   ny = 16384
 
-! color channel R(1), G(2), B(3)  
-  icolor = 3
-
   if (ask4input) call get_args()
+
+
+! color channel R(1), G(2), B(3)  
+  outcolors = (/1,2,3/)
+
 
 !search data files in that directory (as "gaiadata_01.fits,...")
   call get_votable_files('data/')
@@ -87,7 +91,6 @@ program gaialaxy
   write(*,*)
   write(*,*)'setting stacking method and units...'
   allocate(image(nx,ny))
-  image = 0._fdp
   
   ptr_s2p => s2p_converter
 
@@ -95,17 +98,29 @@ program gaialaxy
 
   call set_flux_units('wavelength')
 
-  call accumulate_gaia_votable(tablenames,colormatrix,iglon,iglat,ptr_s2p,icolor,image)
 
-  write(*,*)
-  write(*,*)'normalizing flux in sr^-1 and dumping image...'
+  image = 0._fdp
 
-  outfitsname = 'gaialaxy'//suffix(icolor)//'.fits'
-  pixsterad = product(pixangles)*(pidp/180.0_fdp)**2
-  write(*,*)'pixel solid angle (sr)= ',pixsterad
+  do i=1,size(outcolors)
 
-  call write_wcsimage_fits(trim(outfitsname),image/pixsterad,header)
+     icolor = outcolors(i)
 
+     write(*,)
+     write(*,*)'stacking for icolor= ',icolor
+     call accumulate_gaia_votable(tablenames,colormatrix,iglon,iglat,ptr_s2p,icolor,image)
+
+     write(*,*)
+     write(*,*)'normalizing flux in sr^-1 and dumping image...'
+
+     outfitsname = 'gaialaxy'//suffix(icolor)//'.fits'
+     pixsterad = product(pixangles)*(pidp/180.0_fdp)**2
+     write(*,*)'pixel solid angle (sr)= ',pixsterad
+
+     call write_wcsimage_fits(trim(outfitsname),image/pixsterad,header)
+
+  enddo
+
+  deallocate(outcolors)
   deallocate(tablenames)
   deallocate(header)
   deallocate(image)
@@ -120,9 +135,6 @@ contains
     write(*,*)'image dimensions: (nx x ny)'
     write(*,*)'nx=? ny=? '
     read(*,*)nx,ny
-    write(*,*)'color channel: (1,2,3)'
-    write(*,*)'icolor=? '
-    read(*,*)icolor
 
   end subroutine get_args
   
