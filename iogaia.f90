@@ -346,13 +346,17 @@ contains
     dx = pixel(1) - real(ic,fdp)
     dy = pixel(2) - real(jc,fdp)
 
-    tx = 1._fdp - dx
-    ty = 1._fdp - dy
-
-    if ((tx.lt.0._fdp).or.(tx.lt.0._fdp)) then
+    tx = 1._fdp - abs(dx)
+    ty = 1._fdp - abs(dy)
+    
+    if ((tx.lt.0._fdp).or.(ty.lt.0._fdp)) then
        stop 'cloud_in_cell: improper weights!'
     endif
 
+    if ((tx.gt.1._fdp).or.(ty.gt.1._fdp)) then
+       stop 'cloud_in_cell: improper weights!'
+    endif
+    
 !find the closest neighbours on a periodic grid
     i=ic       
     ip1 = modulo(ic + 1,nx)
