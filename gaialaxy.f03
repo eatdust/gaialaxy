@@ -105,7 +105,7 @@ program gaialaxy
 
      icolor = outcolors(i)
 
-     write(*,)
+     write(*,*)
      write(*,*)'stacking for icolor= ',icolor
      call accumulate_gaia_votable(tablenames,colormatrix,iglon,iglat,ptr_s2p,icolor,image)
 
