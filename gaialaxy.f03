@@ -99,10 +99,10 @@ program gaialaxy
   call set_flux_units('wavelength')
 
 
-  image = 0._fdp
-
   do i=1,size(outcolors)
 
+     image = 0._fdp
+     
      icolor = outcolors(i)
 
      write(*,*)
