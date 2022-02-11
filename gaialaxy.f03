@@ -62,8 +62,8 @@ program gaialaxy
   
     
 !image size  
-  nx = 32768
-  ny = 16384
+  nx = 32768*2
+  ny = 16384*2
 
   if (ask4input) call get_args()
 
